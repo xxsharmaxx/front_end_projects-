@@ -27,7 +27,7 @@ Each project focuses on improving UI/UX, responsiveness, and real-world web deve
 | Day | Project | Description |
 |-----|--------|------------|
 |  Portfolio Website | Personal portfolio showcasing projects |
-|  (Add new project) | (Update description) |
+|  (E-Commerece web-sote) | (fashion website showcasing model) |
 
 👉 I update this table daily as I build new projects.
 

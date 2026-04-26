@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DevFolio Builder | Templates</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body id="pageBody" class="theme-dark">
+  <header class="navbar">
+    <div class="logo">DevFolio Builder</div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="builder.html">Builder</a>
+      <a href="templates.html">Templates</a>
+      <a href="preview.html">Preview</a>
+      <a href="portfolio.html">Portfolio</a>
+      <a href="about.html">About</a>
+    </nav>
+    <button class="theme-toggle" onclick="toggleTheme()">Toggle Theme</button>
+  </header>
+
+  <section class="section">
+    <h1 class="page-title">Portfolio Themes</h1>
+    <p class="page-subtitle">Select the theme for your final hosted portfolio.</p>
+
+    <div class="template-grid">
+      <div class="template-card glass">
+        <h3>Dark Professional</h3>
+        <p>Best for developers, sleek and recruiter friendly.</p>
+        <button class="btn btn-primary" onclick="setPortfolioTheme('theme-dark')">Use Dark</button>
+      </div>
+
+      <div class="template-card glass">
+        <h3>Light Minimal</h3>
+        <p>Clean and elegant layout for simple presentation.</p>
+        <button class="btn btn-primary" onclick="setPortfolioTheme('theme-light')">Use Light</button>
+      </div>
+
+      <div class="template-card glass">
+        <h3>Purple Accent</h3>
+        <p>Modern, slightly bold, and visually unique.</p>
+        <button class="btn btn-primary" onclick="setPortfolioTheme('theme-purple')">Use Purple</button>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p>© 2026 DevFolio Builder</p>
+  </footer>
+
+  <script src="js/common.js"></script>
+  <script>
+    function setPortfolioTheme(theme) {
+      localStorage.setItem("portfolioTheme", theme);
+      document.getElementById("pageBody").className = theme;
+      alert("Portfolio theme updated.");
+    }
+  </script>
+</body>
+</html>

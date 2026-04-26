@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DevFolio Builder | Preview</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body id="pageBody" class="theme-dark">
+  <header class="navbar">
+    <div class="logo">DevFolio Builder</div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="builder.html">Builder</a>
+      <a href="templates.html">Templates</a>
+      <a href="preview.html">Preview</a>
+      <a href="portfolio.html">Portfolio</a>
+      <a href="about.html">About</a>
+    </nav>
+    <button class="theme-toggle" onclick="toggleTheme()">Toggle Theme</button>
+  </header>
+
+  <section class="section">
+    <div class="portfolio-hero glass">
+      <div class="profile-wrap">
+        <img id="outProfileImage" class="profile-image" src="https://via.placeholder.com/150x150?text=Profile" alt="Profile" />
+      </div>
+
+      <div class="portfolio-info">
+        <span class="badge">Live Portfolio Preview</span>
+        <h1 id="outName">Dheeraj Sharma</h1>
+        <h3 id="outRole">Frontend Developer | MCA - Cloud Computing & DevOps</h3>
+        <p id="outTagline">Building responsive web experiences with a strong foundation in cloud, DevOps, and modern front-end development.</p>
+
+        <div class="contact-row">
+          <span id="outEmail">dheeraj@example.com</span>
+          <span id="outPhone">+91 98765 43210</span>
+          <span id="outLocation">Kharar, Punjab, India</span>
+        </div>
+
+        <div class="hero-actions">
+          <a id="outGithub" href="#" target="_blank" class="btn btn-primary">GitHub</a>
+          <a id="outLinkedin" href="#" target="_blank" class="btn btn-outline">LinkedIn</a>
+          <button class="btn btn-outline" onclick="goToFinalPortfolio()">Open Final Portfolio</button>
+          <button class="btn btn-primary" onclick="window.print()">Download PDF</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="glass content-block">
+      <h2>About Me</h2>
+      <p id="outAbout"></p>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2 class="section-title">Skills</h2>
+    <div id="skillsContainer" class="skills-list"></div>
+  </section>
+
+  <section class="section">
+    <h2 class="section-title">Projects</h2>
+    <div class="projects-grid" id="projectsContainer"></div>
+  </section>
+
+  <section class="section">
+    <h2 class="section-title">GitHub Stats</h2>
+    <div class="glass github-box">
+      <img id="githubStats" class="github-stats" src="" alt="GitHub Stats" />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="glass content-block">
+      <h2>Education</h2>
+      <p id="outEducation"></p>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p>© 2026 DevFolio Builder</p>
+  </footer>
+
+  <script src="js/common.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/preview.js"></script>
+</body>
+</html>

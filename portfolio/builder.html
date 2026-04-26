@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DevFolio Builder | Builder</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body id="pageBody" class="theme-dark">
+  <header class="navbar">
+    <div class="logo">DevFolio Builder</div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="builder.html">Builder</a>
+      <a href="templates.html">Templates</a>
+      <a href="preview.html">Preview</a>
+      <a href="portfolio.html">Portfolio</a>
+      <a href="about.html">About</a>
+    </nav>
+    <button class="theme-toggle" onclick="toggleTheme()">Toggle Theme</button>
+  </header>
+
+  <section class="section">
+    <h1 class="page-title">Portfolio Builder</h1>
+    <p class="page-subtitle">Fill your details and generate a professional multi-page portfolio.</p>
+
+    <div class="builder-layout">
+      <div class="form-panel glass">
+        <h2>Personal Details</h2>
+
+        <label>Full Name</label>
+        <input type="text" id="name" value="Dheeraj Sharma" />
+
+        <label>Role</label>
+        <input type="text" id="role" value="Frontend Developer | MCA - Cloud Computing & DevOps" />
+
+        <label>Tagline</label>
+        <input type="text" id="tagline" value="Building responsive web experiences with a strong foundation in cloud, DevOps, and modern front-end development." />
+
+        <label>About</label>
+        <textarea id="about" rows="4">I am an MCA student specializing in Cloud Computing & DevOps with practical skills in front-end development, Azure, Linux, databases, and web applications. I enjoy building clean user interfaces, interactive tools, and project-based solutions that demonstrate real-world product thinking.</textarea>
+
+        <label>Email</label>
+        <input type="email" id="email" value="dheeraj@example.com" />
+
+        <label>Phone</label>
+        <input type="text" id="phone" value="+91 98765 43210" />
+
+        <label>Location</label>
+        <input type="text" id="location" value="Kharar, Punjab, India" />
+
+        <label>GitHub Profile Link</label>
+        <input type="text" id="github" value="https://github.com/yourusername" />
+
+        <label>LinkedIn Profile Link</label>
+        <input type="text" id="linkedin" value="https://linkedin.com/in/yourusername" />
+
+        <label>Profile Image</label>
+        <input type="file" id="profileImage" accept="image/*" />
+
+        <label>Skills (format: skill:percentage, comma separated)</label>
+        <textarea id="skills" rows="4">HTML:95, CSS:92, JavaScript:90, Bootstrap:88, React:80, Node.js:75, Express:74, MySQL:82, MongoDB:72, Azure:78, Linux:76, Python:80</textarea>
+
+        <label>Education</label>
+        <textarea id="education" rows="3">Master of Computer Applications (MCA) - Cloud Computing & DevOps</textarea>
+
+        <h2 class="mt-24">Project 1</h2>
+        <label>Title</label>
+        <input type="text" id="project1Title" value="Smart Code Playground" />
+        <label>Description</label>
+        <textarea id="project1Desc" rows="3">A browser-based HTML, CSS, and JavaScript playground with live preview, save/load, theme switching, and downloadable project support.</textarea>
+        <label>Screenshot URL</label>
+        <input type="text" id="project1Image" value="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&w=900&q=80" />
+
+        <h2 class="mt-24">Project 2</h2>
+        <label>Title</label>
+        <input type="text" id="project2Title" value="Azure Multi-Region Web Application" />
+        <label>Description</label>
+        <textarea id="project2Desc" rows="3">A multi-region web deployment concept using Microsoft Azure with Traffic Manager, monitoring, and cloud scalability concepts.</textarea>
+        <label>Screenshot URL</label>
+        <input type="text" id="project2Image" value="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=900&q=80" />
+
+        <h2 class="mt-24">Project 3</h2>
+        <label>Title</label>
+        <input type="text" id="project3Title" value="Secure REST API with JWT" />
+        <label>Description</label>
+        <textarea id="project3Desc" rows="3">A Node.js and Express based REST API with JWT authentication, protected routes, and MongoDB integration.</textarea>
+        <label>Screenshot URL</label>
+        <input type="text" id="project3Image" value="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=900&q=80" />
+
+        <label>Contact Message Default Text</label>
+        <textarea id="contactIntro" rows="2">Feel free to reach out for collaboration, internships, or front-end development opportunities.</textarea>
+
+        <div class="action-row">
+          <button class="btn btn-primary" onclick="savePortfolio()">Save</button>
+          <button class="btn btn-outline" onclick="loadPortfolio()">Load</button>
+          <button class="btn btn-outline" onclick="clearPortfolio()">Clear</button>
+          <button class="btn btn-primary" onclick="goToPreview()">Preview</button>
+        </div>
+      </div>
+
+      <div class="preview-panel glass">
+        <h2>Live Quick Preview</h2>
+        <div class="mini-profile">
+          <img id="miniProfileImage" src="https://via.placeholder.com/120x120?text=Profile" alt="Profile Preview" class="mini-profile-image" />
+          <h3 id="previewName">Dheeraj Sharma</h3>
+          <p id="previewRole">Frontend Developer | MCA - Cloud Computing & DevOps</p>
+          <p id="previewTagline">Building responsive web experiences with a strong foundation in cloud, DevOps, and modern front-end development.</p>
+        </div>
+
+        <div class="mini-section">
+          <h4>Skills</h4>
+          <div id="previewSkills"></div>
+        </div>
+
+        <div class="mini-section">
+          <h4>Projects</h4>
+          <ul id="previewProjects">
+            <li>Smart Code Playground</li>
+            <li>Azure Multi-Region Web Application</li>
+            <li>Secure REST API with JWT</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p>© 2026 DevFolio Builder</p>
+  </footer>
+
+  <script src="js/common.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/builder.js"></script>
+</body>
+</html>

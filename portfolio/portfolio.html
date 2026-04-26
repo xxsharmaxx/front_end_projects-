@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Developer Portfolio</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body id="pageBody" class="theme-dark">
+  <header class="navbar">
+    <div class="logo">Developer Portfolio</div>
+    <nav>
+      <a href="#hero">Home</a>
+      <a href="#aboutSec">About</a>
+      <a href="#skillsSec">Skills</a>
+      <a href="#projectsSec">Projects</a>
+      <a href="#contactSec">Contact</a>
+    </nav>
+    <button class="theme-toggle" onclick="toggleTheme()">Toggle Theme</button>
+  </header>
+
+  <section class="section portfolio-main" id="hero">
+    <div class="portfolio-hero glass">
+      <div class="profile-wrap">
+        <img id="finalProfileImage" class="profile-image" src="https://via.placeholder.com/150x150?text=Profile" alt="Profile" />
+      </div>
+      <div class="portfolio-info">
+        <span class="badge">Hosted Portfolio</span>
+        <h1 id="finalName">Dheeraj Sharma</h1>
+        <h3 id="finalRole">Frontend Developer | MCA - Cloud Computing & DevOps</h3>
+        <p id="finalTagline">Building responsive web experiences with a strong foundation in cloud, DevOps, and modern front-end development.</p>
+
+        <div class="contact-row">
+          <span id="finalEmail">dheeraj@example.com</span>
+          <span id="finalPhone">+91 98765 43210</span>
+          <span id="finalLocation">Kharar, Punjab, India</span>
+        </div>
+
+        <div class="hero-actions">
+          <a id="finalGithub" href="#" target="_blank" class="btn btn-primary">GitHub</a>
+          <a id="finalLinkedin" href="#" target="_blank" class="btn btn-outline">LinkedIn</a>
+          <button class="btn btn-outline" onclick="window.print()">Download PDF</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="aboutSec">
+    <div class="glass content-block">
+      <h2>About Me</h2>
+      <p id="finalAbout"></p>
+    </div>
+  </section>
+
+  <section class="section" id="skillsSec">
+    <h2 class="section-title">Skills</h2>
+    <div id="finalSkillsContainer" class="skills-list"></div>
+  </section>
+
+  <section class="section" id="projectsSec">
+    <h2 class="section-title">Projects</h2>
+    <div class="projects-grid" id="finalProjectsContainer"></div>
+  </section>
+
+  <section class="section">
+    <h2 class="section-title">GitHub Stats</h2>
+    <div class="glass github-box">
+      <img id="finalGithubStats" class="github-stats" src="" alt="GitHub Stats" />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="glass content-block">
+      <h2>Education</h2>
+      <p id="finalEducation"></p>
+    </div>
+  </section>
+
+  <section class="section" id="contactSec">
+    <div class="glass contact-box">
+      <h2>Contact Me</h2>
+      <p id="contactIntroText">Feel free to reach out for collaboration, internships, or front-end development opportunities.</p>
+
+      <form id="contactForm" class="contact-form">
+        <input type="text" id="visitorName" placeholder="Your Name" required />
+        <input type="email" id="visitorEmail" placeholder="Your Email" required />
+        <textarea id="visitorMessage" rows="5" placeholder="Your Message" required></textarea>
+        <button type="submit" class="btn btn-primary">Send Message</button>
+      </form>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p>© 2026 Developer Portfolio</p>
+  </footer>
+
+  <script src="js/common.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/portfolio.js"></script>
+</body>
+</html>

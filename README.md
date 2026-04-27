@@ -24,8 +24,8 @@ Each project focuses on improving UI/UX, responsiveness, and real-world web deve
 
 ## 📂 Projects List
 
-| Day | Project | Description |
-|-----|--------|------------|
+| Day | Project |
+|-----|--------|
 |  Portfolio Website | Personal portfolio showcasing projects |
 |  (E-Commerece web-sote) | (fashion website showcasing model) |
 |  (Facebook div app) | (making a 3 container for creating a page )| 

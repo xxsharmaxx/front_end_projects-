@@ -10,7 +10,8 @@ Each project focuses on improving UI/UX, responsiveness, and real-world web deve
 - Build real-world frontend projects 💻  
 - Improve UI/UX design skills 🎨  
 - Practice HTML, CSS, and JavaScript daily 📅  
-- Create a strong portfolio for placements 🚀  
+- Create a strong portfolio for placements 🚀
+- Using react redux for future use
 
 ---
 

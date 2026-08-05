@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Parking System</title>
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --primary-hover: #4338ca;
+            --bg-color: #f3f4f6;
+            --card-bg: #ffffff;
+            --text-main: #1f2937;
+            --text-muted: #6b7280;
+            --border: #e5e7eb;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        header h1 {
+            color: var(--primary);
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            color: var(--text-muted);
+        }
+
+        .dashboard {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 2rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        .card h2 {
+            margin-bottom: 1.5rem;
+            font-size: 1.25rem;
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 0.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .form-group input:focus, .form-group select:focus {
+            border-color: var(--primary);
+        }
+
+        button.btn-primary {
+            width: 100%;
+            padding: 0.75rem;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        button.btn-primary:hover {
+            background-color: var(--primary-hover);
+        }
+
+        /* Table Styles */
+        .table-container {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        th {
+            background-color: #f8fafc;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+
+        .badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .badge.car { background-color: #dbeafe; color: #1e40af; }
+        .badge.bike { background-color: #fef3c7; color: #92400e; }
+        .badge.other { background-color: #f3f4f6; color: #374151; }
+
+        button.btn-checkout {
+            padding: 0.5rem 1rem;
+            background-color: #ef4444;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.2s;
+        }
+
+        button.btn-checkout:hover {
+            background-color: #dc2626;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        @media (max-width: 768px) {
+            .dashboard {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Smart Parking System</h1>
+            <p>Manage vehicle entries and track parking durations effortlessly</p>
+        </header>
+
+        <div class="dashboard">
+            <!-- Add Vehicle Form -->
+            <div class="card">
+                <h2>Add Vehicle</h2>
+                <form id="parkingForm">
+                    <div class="form-group">
+                        <label for="ownerName">Owner Name</label>
+                        <input type="text" id="ownerName" placeholder="Enter owner name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="vehicleNumber">Vehicle Number</label>
+                        <input type="text" id="vehicleNumber" placeholder="e.g. AB-12-CD-3456" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="vehicleType">Vehicle Type</label>
+                        <select id="vehicleType" required>
+                            <option value="Car">Car</option>
+                            <option value="Bike">Bike / Motorcycle</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn-primary">Park Vehicle</button>
+                </form>
+            </div>
+
+            <!-- Parked Vehicles List -->
+            <div class="card">
+                <h2>Currently Parked Vehicles (<span id="vehicleCount">0</span>)</h2>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Vehicle No.</th>
+                                <th>Type</th>
+                                <th>Owner</th>
+                                <th>Entry Time</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tableBody">
+                            <!-- Rows will be added here via JS -->
+                        </tbody>
+                    </table>
+                    <div id="emptyState" class="empty-state">
+                        No vehicles are currently parked.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Array to store parked vehicles
+        let parkingLot = [];
+
+        // DOM Elements
+        const form = document.getElementById('parkingForm');
+        const tableBody = document.getElementById('tableBody');
+        const emptyState = document.getElementById('emptyState');
+        const vehicleCountSpan = document.getElementById('vehicleCount');
+
+        // Event Listener for form submission
+        form.addEventListener('submit', function(e) {
+            e.preventDefault(); // Prevent page reload
+
+            const ownerName = document.getElementById('ownerName').value;
+            const vehicleNumber = document.getElementById('vehicleNumber').value.toUpperCase();
+            const vehicleType = document.getElementById('vehicleType').value;
+            
+            // Record current time
+            const entryTime = new Date();
+
+            // Create vehicle object
+            const vehicle = {
+                id: Date.now().toString(), // Unique ID based on timestamp
+                owner: ownerName,
+                number: vehicleNumber,
+                type: vehicleType,
+                timeIn: entryTime
+            };
+
+            // Add to array and update UI
+            parkingLot.push(vehicle);
+            form.reset();
+            renderTable();
+        });
+
+        // Function to render the table
+        function renderTable() {
+            // Update counter
+            vehicleCountSpan.textContent = parkingLot.length;
+
+            // Show/hide empty state
+            if (parkingLot.length === 0) {
+                emptyState.style.display = 'block';
+                tableBody.innerHTML = '';
+                return;
+            }
+
+            emptyState.style.display = 'none';
+            tableBody.innerHTML = '';
+
+            // Generate rows for each vehicle
+            parkingLot.forEach(vehicle => {
+                // Format the entry time (e.g., 02:30 PM)
+                const timeString = vehicle.timeIn.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+                
+                // Determine badge class
+                const badgeClass = vehicle.type.toLowerCase();
+
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td><strong>${vehicle.number}</strong></td>
+                    <td><span class="badge ${badgeClass}">${vehicle.type}</span></td>
+                    <td>${vehicle.owner}</td>
+                    <td>${timeString}</td>
+                    <td>
+                        <button class="btn-checkout" onclick="checkoutVehicle('${vehicle.id}')">
+                            Check Out
+                        </button>
+                    </td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+
+        // Function to handle vehicle checkout
+        function checkoutVehicle(id) {
+            // Find the vehicle
+            const index = parkingLot.findIndex(v => v.id === id);
+            
+            if (index !== -1) {
+                const vehicle = parkingLot[index];
+                const timeOut = new Date();
+                
+                // Calculate duration
+                const durationMs = timeOut - vehicle.timeIn;
+                
+                // Convert to seconds and minutes for the alert summary
+                const totalSeconds = Math.floor(durationMs / 1000);
+                const minutes = Math.floor(totalSeconds / 60);
+                const seconds = totalSeconds % 60;
+
+                // Format entry and exit times for the receipt alert
+                const formatTime = (date) => date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second:'2-digit' });
+
+                // Create a checkout summary
+                const summary = `--- CHECKOUT SUMMARY ---\n` +
+                                `Vehicle: ${vehicle.number} (${vehicle.type})\n` +
+                                `Owner: ${vehicle.owner}\n` +
+                                `Entry: ${formatTime(vehicle.timeIn)}\n` +
+                                `Exit: ${formatTime(timeOut)}\n` +
+                                `Total Time Parked: ${minutes} min ${seconds} sec\n\n` +
+                                `Vehicle has been successfully removed from the lot.`;
+
+                // Show alert to user
+                alert(summary);
+
+                // Remove from array and update UI
+                parkingLot.splice(index, 1);
+                renderTable();
+            }
+        }
+    </script>
+</body>
+</html>

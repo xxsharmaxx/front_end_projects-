@@ -1,75 +1,239 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Facebook Style Page</title>
-    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SocialApp - Feed</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <style>
+        body {
+            background-color: #f0f2f5; /* Official Facebook background color */
+            padding-top: 70px;
+        }
+        .navbar {
+            background-color: #1877f2; /* Official Facebook blue */
+        }
+        .sidebar-item {
+            padding: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .sidebar-item:hover {
+            background-color: #e4e6e9;
+        }
+        .sidebar-icon {
+            width: 30px;
+            text-align: center;
+            font-size: 1.2rem;
+            color: #1877f2;
+        }
+        .profile-pic {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        /* Using Flexbox for action buttons */
+        .post-actions {
+            display: flex;
+            justify-content: space-between;
+            border-top: 1px solid #ddd;
+            padding-top: 10px;
+            margin-top: 10px;
+        }
+        .action-btn {
+            flex: 1;
+            text-align: center;
+            padding: 8px;
+            border-radius: 5px;
+            cursor: pointer;
+            color: #606770;
+            font-weight: bold;
+        }
+        .action-btn:hover {
+            background-color: #f0f2f5;
+        }
+        .liked {
+            color: #1877f2;
+        }
+    </style>
 </head>
 <body>
 
-    <!-- Top Header -->
-    <div class="header">
-        facebook
-        <div class="nav">
-            <div class="nav-item">Home</div>
-            <div class="nav-item">Profile</div>
-            <div class="nav-item">Messages</div>
-            <div class="nav-item">Logout</div>
-        </div>
-    </div>
+    <!-- Top Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top shadow-sm">
+        <div class="container-fluid px-4">
+            <a class="navbar-brand fw-bold fs-3" href="#"><i class="fab fa-facebook"></i> SocialApp</a>
+            
+            <form class="d-flex mx-auto w-25" onsubmit="event.preventDefault();">
+                <input class="form-control rounded-pill border-0" type="search" placeholder="Search...">
+            </form>
 
-    <!-- Main Content -->
-    <div class="main">
-
-        <!-- Left Sidebar -->
-        <div class="sidebar">
-            <div class="side-item">News Feed</div>
-            <div class="side-item">Friends</div>
-            <div class="side-item">Groups</div>
-            <div class="side-item">Marketplace</div>
-            <div class="side-item">Watch</div>
-        </div>
-
-        <!-- Feed Section -->
-        <div class="feed">
-
-            <div class="status-box">
-                What's on your mind?
-                <div class="btn">Post</div>
+            <div class="d-flex align-items-center text-white gap-3 fs-5">
+                <i class="fas fa-bell header-icon"></i>
+                <i class="fas fa-comment header-icon"></i>
+                <img src="https://ui-avatars.com/api/?name=User&background=fff&color=1877f2" class="profile-pic border border-2 border-white" alt="Profile">
             </div>
+        </div>
+    </nav>
 
-            <div class="post">
-                <div class="username">Amit Kumar</div>
-                <div class="content">wants new Friends</div>
-                <div class="actions">
-                    <div class="btn small">Like</div>
-                    <div class="btn small">Comment</div>
-                    <div class="btn small">Share</div>
+    <!-- Main Grid Layout (2D CSS Grid via Bootstrap) -->
+    <div class="container-fluid px-4">
+        <div class="row">
+            
+            <!-- Left Sidebar (Navigation) -->
+            <div class="col-md-3 d-none d-md-block" style="height: calc(100vh - 70px); position: sticky; top: 70px;">
+                <div class="d-flex flex-column gap-2 mt-3 fw-bold text-secondary">
+                    <div class="sidebar-item"><img src="https://ui-avatars.com/api/?name=User&background=1877f2&color=fff" class="profile-pic me-2"> John Doe</div>
+                    <div class="sidebar-item"><i class="fas fa-user-friends sidebar-icon"></i> Friends</div>
+                    <div class="sidebar-item"><i class="fas fa-users sidebar-icon"></i> Groups</div>
+                    <div class="sidebar-item"><i class="fas fa-store sidebar-icon"></i> Marketplace</div>
+                    <div class="sidebar-item"><i class="fas fa-tv sidebar-icon"></i> Watch</div>
+                    <div class="sidebar-item"><i class="fas fa-clock sidebar-icon"></i> Memories</div>
                 </div>
             </div>
 
-            <div class="post">
-                <div class="username">Piyush Kochar</div>
-                <div class="content">I am new here! </div>
-                <div class="actions">
-                    <div class="btn small">Like</div>
-                    <div class="btn small">Comment</div>
-                    <div class="btn small">Share</div>
+            <!-- Center Column (The Feed) -->
+            <div class="col-md-6 mt-3">
+                
+                <!-- Create Post Card -->
+                <div class="card shadow-sm border-0 mb-4 rounded-3">
+                    <div class="card-body">
+                        <div class="d-flex gap-2 mb-3">
+                            <img src="https://ui-avatars.com/api/?name=User&background=1877f2&color=fff" class="profile-pic">
+                            <!-- This textarea will be read by our JS DOM script -->
+                            <textarea id="postInput" class="form-control rounded-pill bg-light border-0" rows="1" placeholder="What's on your mind, John?"></textarea>
+                        </div>
+                        <hr>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="d-flex gap-3 text-muted fw-bold">
+                                <div><i class="fas fa-video text-danger"></i> Live Video</div>
+                                <div><i class="fas fa-images text-success"></i> Photo/Video</div>
+                                <div><i class="far fa-smile text-warning"></i> Feeling</div>
+                            </div>
+                            <button id="postBtn" class="btn btn-primary px-4 fw-bold">Post</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Feed Container (New posts go here) -->
+                <div id="feedContainer">
+                    
+                    <!-- Hardcoded Example Post -->
+                    <div class="card shadow-sm border-0 mb-4 rounded-3">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center gap-2 mb-2">
+                                <img src="https://ui-avatars.com/api/?name=Mark&background=random" class="profile-pic">
+                                <div>
+                                    <h6 class="mb-0 fw-bold">Mark Zuckerberg</h6>
+                                    <small class="text-muted">2 hours ago</small>
+                                </div>
+                            </div>
+                            <p class="card-text mt-3">Just finished upgrading the server racks! The new cloud infrastructure is incredibly fast. 🚀</p>
+                            
+                            <!-- Flexbox layout for buttons -->
+                            <div class="post-actions">
+                                <div class="action-btn" onclick="toggleLike(this)"><i class="far fa-thumbs-up"></i> Like</div>
+                                <div class="action-btn"><i class="far fa-comment"></i> Comment</div>
+                                <div class="action-btn"><i class="fas fa-share"></i> Share</div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Right Sidebar (Contacts / Sponsored) -->
+            <div class="col-md-3 d-none d-md-block mt-3">
+                <h6 class="text-muted fw-bold mb-3 border-bottom pb-2">Sponsored</h6>
+                <div class="mb-4 d-flex align-items-center gap-2">
+                    <img src="https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?w=100&h=100&fit=crop" class="rounded" width="50" height="50" style="object-fit: cover;">
+                    <small class="fw-bold">Learn Cloud Computing Fast</small>
+                </div>
+
+                <h6 class="text-muted fw-bold mb-3 border-bottom pb-2">Contacts</h6>
+                <div class="sidebar-item d-flex align-items-center gap-2">
+                    <img src="https://ui-avatars.com/api/?name=Alice&background=random" class="profile-pic" style="width:30px;height:30px;"> Alice Smith
+                </div>
+                <div class="sidebar-item d-flex align-items-center gap-2">
+                    <img src="https://ui-avatars.com/api/?name=Bob&background=random" class="profile-pic" style="width:30px;height:30px;"> Bob Johnson
                 </div>
             </div>
 
         </div>
-
-        <!-- Right Sidebar -->
-        <div class="rightbar">
-            <div class="right-title">Suggestions</div>
-            <div class="right-item">Follow Web Dev</div>
-            <div class="right-item">Follow CSS Tips</div>
-            <div class="right-item">Follow HTML World</div>
-            <div class="btn">See More</div>
-        </div>
-
     </div>
 
+    <!-- JavaScript (Vanilla DOM Manipulation) -->
+    <script>
+        // 1. Element Selection
+        const postBtn = document.getElementById('postBtn');
+        const postInput = document.getElementById('postInput');
+        const feedContainer = document.getElementById('feedContainer');
 
+        // 2. Event Listening: Listen for the user to click the "Post" button
+        postBtn.addEventListener('click', function() {
+            
+            // Get the value of the textarea
+            const textContent = postInput.value.trim();
+            
+            // Stop if the input is empty
+            if (textContent === "") return; 
+
+            // 3. Element Creation (DOM Creation)
+            const newPost = document.createElement('div');
+            // 4. Style/Class Manipulation
+            newPost.className = 'card shadow-sm border-0 mb-4 rounded-3';
+            
+            // 5. Content Manipulation (Injecting HTML structure into the new tag)
+            newPost.innerHTML = `
+                <div class="card-body">
+                    <div class="d-flex align-items-center gap-2 mb-2">
+                        <img src="https://ui-avatars.com/api/?name=User&background=1877f2&color=fff" class="profile-pic">
+                        <div>
+                            <h6 class="mb-0 fw-bold">John Doe</h6>
+                            <small class="text-muted">Just now</small>
+                        </div>
+                    </div>
+                    <p class="card-text mt-3">${textContent}</p>
+                    <div class="post-actions">
+                        <div class="action-btn" onclick="toggleLike(this)"><i class="far fa-thumbs-up"></i> Like</div>
+                        <div class="action-btn"><i class="far fa-comment"></i> Comment</div>
+                        <div class="action-btn"><i class="fas fa-share"></i> Share</div>
+                    </div>
+                </div>
+            `;
+
+            // Insert the new post at the top of the feed (prepend)
+            feedContainer.prepend(newPost);
+
+            // Clear the textarea for the next post
+            postInput.value = '';
+        });
+
+        // Function to toggle the Like button color (Class Manipulation)
+        function toggleLike(element) {
+            // Toggles the "liked" CSS class on or off
+            element.classList.toggle('liked');
+            
+            // Change the icon from outline to solid based on the class
+            const icon = element.querySelector('i');
+            if(element.classList.contains('liked')) {
+                icon.classList.remove('far');
+                icon.classList.add('fas');
+            } else {
+                icon.classList.remove('fas');
+                icon.classList.add('far');
+            }
+        }
+    </script>
+
+    <!-- Bootstrap 5 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
